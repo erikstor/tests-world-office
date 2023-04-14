@@ -1,0 +1,17 @@
+.size-table {
+  max-width: 100%;
+  width: 90%;
+  margin: auto;
+  padding: 2%;
+}
+
+button[color='warn'] {
+  margin-left: 5px;
+}
+
+
+button .center-icon{
+  margin: auto;
+}
+
+

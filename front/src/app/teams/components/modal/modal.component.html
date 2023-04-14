@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>Equipos</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput
+               placeholder="Nombre"
+               formControlName="name">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput
+               placeholder="Estadio"
+               formControlName="stadium">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput
+               placeholder="Sitio Web"
+               formControlName="webSite">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput
+               placeholder="Nacionalidad"
+               formControlName="country">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Elije una fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fundation">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput
+               placeholder="Entrenador"
+               formControlName="coach">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput
+               placeholder="Capacidad"
+               formControlName="ability">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput
+               placeholder="Valor"
+               formControlName="worth">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-flat-button color="warn" (click)="close()">Cerrar</button>
+  <button mat-flat-button
+          color="primary"
+          matTooltip="Guardar equipo"
+          matTooltipPosition="right"
+          (click)="save()"
+          [disabled]="form.invalid"
+  >
+    Guardar
+  </button>
+</mat-dialog-actions>

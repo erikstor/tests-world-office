@@ -1,0 +1,158 @@
+<div class="size-table">
+
+
+  <mat-grid-list cols="2" rowHeight="100px">
+
+    <mat-grid-tile class="left-button-register">
+      <h1>Equipos</h1>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="right-button-logout" *ngIf="isLogged">
+      <button
+        (click)="logout()"
+        class="center-icon"
+        mat-flat-button
+        color="primary"
+        matTooltip="Cerrar sesion"
+        matTooltipPosition="right"
+      >
+        <mat-icon class="center-icon" aria-hidden="false" aria-label="Logout icon" fontIcon="logout"></mat-icon>
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <hr>
+
+
+  <mat-grid-list cols="4" rowHeight="100px" [formGroup]="form">
+
+    <mat-grid-tile class="left-button-register" *ngIf="isLogged">
+      <button
+        (click)="openDialog()"
+        class="center-icon"
+        mat-flat-button
+        color="primary"
+        matTooltip="Registrar equipo"
+        matTooltipPosition="right"
+      >
+        <mat-icon class="center-icon" aria-hidden="false" aria-label="Add icon" fontIcon="add"></mat-icon>
+      </button>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Elije una fecha de inicio</mat-label>
+        <input matInput [matDatepicker]="picker_start" formControlName="start">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker_start"></mat-datepicker-toggle>
+        <mat-datepicker #picker_start></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Elije una fecha de fin</mat-label>
+        <input matInput [matDatepicker]="picker_final" formControlName="end">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker_final"></mat-datepicker-toggle>
+        <mat-datepicker #picker_final></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <button
+        (click)="findByDates()"
+        class="center-icon"
+        mat-flat-button
+        color="accent"
+        matTooltip="Filtrar equipo"
+        matTooltipPosition="right"
+      >
+        <mat-icon class="center-icon" aria-hidden="false" aria-label="Edit icon" fontIcon="search"></mat-icon>
+      </button>
+    </mat-grid-tile>
+
+
+  </mat-grid-list>
+
+
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Estadio">
+      <th mat-header-cell *matHeaderCellDef> Estadio</th>
+      <td mat-cell *matCellDef="let element"> {{element.stadium}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Sitio Web">
+      <th mat-header-cell *matHeaderCellDef> Sitio Web</th>
+      <td mat-cell *matCellDef="let element"> {{element.webSite}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Nacionalidad">
+      <th mat-header-cell *matHeaderCellDef> Nacionalidad</th>
+      <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+    </ng-container>
+
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Año de Fundación">
+      <th mat-header-cell *matHeaderCellDef> Año de Fundación</th>
+      <td mat-cell *matCellDef="let element"> {{element.fundation}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Entrenador">
+      <th mat-header-cell *matHeaderCellDef> Entrenador</th>
+      <td mat-cell *matCellDef="let element"> {{element.coach}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Capacidad">
+      <th mat-header-cell *matHeaderCellDef> Capacidad</th>
+      <td mat-cell *matCellDef="let element"> {{element.ability}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Valor">
+      <th mat-header-cell *matHeaderCellDef> Valor</th>
+      <td mat-cell *matCellDef="let element"> {{element.worth}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Acciones" >
+      <th mat-header-cell *matHeaderCellDef> Acciones</th>
+
+      <td mat-cell *matCellDef="let element">
+        <button mat-flat-button
+                color="primary"
+                matTooltip="Actualizar equipo"
+                matTooltipPosition="right"
+                (click)="getTeamDetail(element.id)">
+          <mat-icon class="center-icon" aria-hidden="false" aria-label="Edit icon" fontIcon="edit"></mat-icon>
+        </button>
+        <button mat-flat-button color="warn" matTooltip="Eliminar equipo" matTooltipPosition="right"
+                (click)="delete(element.id)">
+          <mat-icon class="center-icon" aria-hidden="false" aria-label="Delete icon" fontIcon="delete"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+
+
